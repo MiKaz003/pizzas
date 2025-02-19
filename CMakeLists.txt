@@ -18,6 +18,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}-lib)
 target_link_libraries(${PROJECT_NAME} PRIVATE pthread)
 
 enable_testing()
+
 include(FetchContent)
 FetchContent_Declare(
   googletest
@@ -25,5 +26,6 @@ FetchContent_Declare(
 )
 
 add_executable(${PROJECT_NAME}-ut ${SRC_LIST} test/PizzeriaTest.cpp)
-add_test(NAME Test Command ${PROJECT_NAME}-ut)
+target_include_directories(${PROJECT_NAME}-ut PRIVATE test/mocks)
+add_test(NAME Test COMMAND ${PROJECT_NAME}-ut)
 # TODO: Write proper build system :)
